@@ -20,7 +20,11 @@ namespace UserAuthenticationApp.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("AuthDbContextConnection")));
 
-                services.AddDefaultIdentity<UserAuthenticationAppUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                services.AddDefaultIdentity<UserAuthenticationAppUser>(options => {
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireUppercase = false;
+                    options.SignIn.RequireConfirmedAccount = false;
+                    })
                     .AddEntityFrameworkStores<AuthDbContext>();
             });
         }
