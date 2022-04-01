@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using UserAuthenticationApp.Models;
 
 namespace UserAuthenticationApp.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -33,5 +35,13 @@ namespace UserAuthenticationApp.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+[Authorize]
+        public IActionResult Secret()
+        {
+            return View();
+;
+       }
     }
+
 }
